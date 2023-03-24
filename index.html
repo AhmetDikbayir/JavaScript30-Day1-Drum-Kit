@@ -61,18 +61,26 @@
 <script>
 
   function playSound(e){
+    //I choose audio
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    //I choose key
     const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    //I can play the audio one after another
     audio.currentTime=0;
     audio.play();
+    //I added playing class for CSS quality.
     key.classList.add('playing');
   }
   
+  //I describe the function what will be done after transitionend event occur.
   function removeTransition(e){
     if(e.propertyName!=='transform') return;
     this.classList.remove('playing');
   }
+
+  //I reached all .key classes
   const keys = document.querySelectorAll('.key');
+  //I use transitionend event because I want to finish CSS transition event on my letters.
   keys.forEach(key=>key.addEventListener('transitionend', removeTransition));
   window.addEventListener('keydown', playSound)
 </script>
